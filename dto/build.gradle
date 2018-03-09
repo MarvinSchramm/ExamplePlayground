@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.2.20'
+        springBootVersion = '2.0.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.1")
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'eclipse'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+group = 'com.uefa.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.1")
+    testCompile(group: "nl.jqno.equalsverifier", name: "equalsverifier", version: "2.4.3")
+
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.1")
+}
